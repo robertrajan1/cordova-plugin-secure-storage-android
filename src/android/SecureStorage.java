@@ -242,7 +242,7 @@ public class SecureStorage extends CordovaPlugin {
     private void unlockCredentials(final String title, final String description) {
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                if (IS_API_29_AVAILABLE && isDeviceSecure()) {
+                if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) && isDeviceSecure()) {
                     // Building a biometric prompt instance with custom title and description.
                     BiometricPrompt.Builder biometricPromptBuilder = new BiometricPrompt.Builder(getContext());
                     biometricPromptBuilder.setTitle(title);
@@ -312,11 +312,9 @@ public class SecureStorage extends CordovaPlugin {
                     try {
                         String alias = service2alias(INIT_SERVICE);
                         SharedPreferencesHandler storage = getStorage(INIT_SERVICE);
-                        if(storage.isEmpty()){
-                            //Solves Issue #96. The RSA key may have been deleted by changing the lock type.
-                            getStorage(INIT_SERVICE).clear();
-                            rsa.createKeyPair(getContext(), alias, userAuthenticationValidityDuration);
-                        }
+                        //Solves Issue #96. The RSA key may have been deleted by changing the lock type.
+                        getStorage(INIT_SERVICE).clear();
+                        rsa.createKeyPair(getContext(), alias, userAuthenticationValidityDuration);
                         generateKeysContext.success();
                     } catch (Exception e) {
                         Log.e(TAG, MSG_KEYS_FAILED, e);
