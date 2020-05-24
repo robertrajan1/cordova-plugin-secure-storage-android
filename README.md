@@ -1,8 +1,15 @@
 # SecureStorage plugin for Apache Cordova
 
-[![NPM](https://nodei.co/npm/cordova-plugin-secure-storage-android10.png?mini=true)](https://nodei.co/npm/cordova-plugin-secure-storage-android10/)
+```npm install https://github.com/fieldofcows/cordova-plugin-secure-storage-android10```
 
-##### This is a fork [mibrito707/cordova-plugin-secure-storage-echo](https://github.com/mibrito707/cordova-plugin-secure-storage-echo) of a fork [Crypho/cordova-plugin-secure-storage](https://github.com/Crypho/cordova-plugin-secure-storage) and uses the encryption cipher method of the original branch (GCC), this way it's possible to migrate/update to this package without losing data.
+## Notes about this fork (fieldofcows)
+This is a fork [duniter-cesium/cordova-plugin-secure-storage-android10](https://github.com/duniter-cesium/cordova-plugin-secure-storage-android10) of what seemed to be (at the time) the most maintained version of this plugin supporting Android 10. It has been branched to fix a couple of issues specific to my own project but that others might find useful. At the time of branch:
+
+### The android security required user authentication
+This ensures the user has authenticated within a fixed period of time otherwise the user is reauthenticated before the store can be accessed. Although this is good security practice it introduced a number of problems across android devices. Particularly, switching from a PIN lock screen to swipe caused the store to be inaccessible with no warning to the user. When this occurred, a bug in the plugin did not detect the correct exception type for the reason the unlock failed and attemps to reauthenticate the user but this fails every time.
+
+### Incorrect API level detected
+Another bug in the plugin was detecting the wrong API level before use resulting in an application crash on certain devices.
 
 ##### Forked from [Crypho/cordova-plugin-secure-storage](https://github.com/Crypho/cordova-plugin-secure-storage) in a effort to keep that project alive. Thank you @ggozad.
 
