@@ -57,11 +57,6 @@
         <source-file src="src/android/RSA.java" target-dir="src/com/crypho/plugins/" />
         <source-file src="src/android/AES.java" target-dir="src/com/crypho/plugins/" />
         <source-file src="src/android/SharedPreferencesHandler.java" target-dir="src/com/crypho/plugins/" />
-
-        <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-            <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
-        </config-file>
     </platform>
 
     <platform name="browser">
